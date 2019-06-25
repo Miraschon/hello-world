@@ -8,13 +8,10 @@ import java.io.FileWriter;
  * Hello world!
  *
  */
-public class App 
-{
-    public App() {
-    }
+public class App {
 
     public static void main(String[] args ) throws IOException {
-        ArrayList<String> strings = new ArrayList<String>();
+        ArrayList<String> strings = new ArrayList<>();
         strings.add("string1");
         strings.add("string2");
         strings.add("string3");
