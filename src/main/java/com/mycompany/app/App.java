@@ -2,11 +2,9 @@ package com.mycompany.app;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
+import java.io.*;
 import java.util.List;
+import java.util.stream.IntStream;
 
 /**
  * Hello world!
@@ -26,16 +24,27 @@ public class App {
             log.error(e.getMessage());
         }
         log.debug("finish");
+
     }
 
     public static void main(String[] args ) {
-        ArrayList<String> strings = new ArrayList<>();
-        strings.add("string1");
-        strings.add("string2");
-        strings.add("string3");
-
         App app = new App();
-        app.writeToFile(strings);
+        app.sum();
     }
 
-}
+    private void sum () {
+        try (BufferedReader br = new BufferedReader(new FileReader("C:\\projects\\numbers.txt"))) {
+            String sCurrentLine;
+            sCurrentLine = br.readLine();
+            String[] s = sCurrentLine.split(" ");
+            int [] arr = new int [s.length];
+            for(int i=0; i<s.length; i++) {
+                arr[i] = Integer.parseInt(s[i]);
+            }
+            int sum = IntStream.of(arr).sum();
+            log.debug("Line - {}", sum);
+        } catch (IOException e) {
+           log.error(e.getMessage());
+        }
+
+}}

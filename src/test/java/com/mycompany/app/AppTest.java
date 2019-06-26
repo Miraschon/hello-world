@@ -19,31 +19,9 @@ public class AppTest  {
 
     @Test
     public void myTest() {
-        List<String> expected = new ArrayList<>();
-        expected.add("string1");
-        expected.add("string2");
-        expected.add("string3");
 
-        App app = new App();
-        app.writeToFile(expected);
 
-        List<String> test = new ArrayList<>();
-        // читаем файл построчно в test
-        try (BufferedReader br = new BufferedReader(new FileReader("target/output.txt")))
-        {
 
-            String sCurrentLine;
-
-            while ((sCurrentLine = br.readLine()) != null) {
-                test.add(sCurrentLine);
-            }
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        // сравниваем два списка
-
-        assertEquals(expected,test);
     }
+
 }
