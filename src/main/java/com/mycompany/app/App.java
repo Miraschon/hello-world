@@ -29,11 +29,12 @@ public class App {
 
     public static void main(String[] args ) {
         App app = new App();
-        app.sum();
+        app.sum("C:\\projects\\hello-world\\src\\test\\recources");
     }
 
-    private void sum () {
-        try (BufferedReader br = new BufferedReader(new FileReader("C:\\projects\\numbers.txt"))) {
+    private int sum(String fileName) {
+        int sum = 0;
+        try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
             String sCurrentLine;
             sCurrentLine = br.readLine();
             String[] s = sCurrentLine.split(" ");
@@ -41,10 +42,10 @@ public class App {
             for(int i=0; i<s.length; i++) {
                 arr[i] = Integer.parseInt(s[i]);
             }
-            int sum = IntStream.of(arr).sum();
+            sum = IntStream.of(arr).sum();
             log.debug("Line - {}", sum);
         } catch (IOException e) {
            log.error(e.getMessage());
         }
-
+        return sum;
 }}
