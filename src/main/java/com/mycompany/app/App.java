@@ -29,10 +29,10 @@ public class App {
 
     public static void main(String[] args ) {
         App app = new App();
-        app.sum("C:\\projects\\hello-world\\src\\test\\recources");
+        app.sum("C:\\projects\\hello-world\\src\\test\\resources\\numbers.txt");
     }
 
-    private int sum(String fileName) {
+    public int sum(String fileName) {
         int sum = 0;
         try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
             String sCurrentLine;
