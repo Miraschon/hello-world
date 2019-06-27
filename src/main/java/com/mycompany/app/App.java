@@ -2,9 +2,14 @@ package com.mycompany.app;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 /**
  * Hello world!
@@ -29,7 +34,22 @@ public class App {
 
     public static void main(String[] args ) {
         App app = new App();
-        app.sum("C:\\projects\\hello-world\\src\\test\\resources\\numbers.txt");
+        app.sort();
+    }
+
+    void sort(){
+        List<String> strings;
+        try (Stream<String> lines = Files.lines(Paths.get("C:\\projects\\task.txt"))) {
+            strings = lines.collect(Collectors.toList());
+            java.util.Collections.sort(strings);
+            FileWriter writer = new FileWriter("C:\\projects\\task.txt");
+            for(String str: strings) {
+                writer.write(str + System.lineSeparator());
+            }
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @SuppressWarnings("SameParameterValue")
