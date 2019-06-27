@@ -30,13 +30,10 @@ public class AppTest  {
         // читаем файл построчно в test
         try (BufferedReader br = new BufferedReader(new FileReader("target/output.txt")))
         {
-
             String sCurrentLine;
-
             while ((sCurrentLine = br.readLine()) != null) {
                 test.add(sCurrentLine);
             }
-
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -49,7 +46,39 @@ public class AppTest  {
     @Test
     public void sumTest(){
         App appTest = new App();
-        int sum = appTest.sum("C:\\projects\\hello-world\\src\\test\\resources\\numbers.txt");
+        int sum = appTest.sum("resources\\numbers.txt");
         assertEquals(55, sum);
+    }
+
+    @Test
+    public void sortTest(){
+        List<String> expected = new ArrayList<>();
+        String unsortedName = "src/test/resources/sorted.txt";
+        String sortedName = "target/testSorted.txt";
+
+        App appTest = new App();
+        appTest.sort(unsortedName,sortedName);
+
+        try (BufferedReader br = new BufferedReader(new FileReader("src/test/resources/sorted.txt")))
+        {
+            String sCurrentLine;
+            while ((sCurrentLine = br.readLine()) != null) {
+                expected.add(sCurrentLine);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        List<String> sorted = new ArrayList<>();
+
+        try (BufferedReader br = new BufferedReader(new FileReader(sortedName)))
+        {
+            String sCurrentLine;
+            while ((sCurrentLine = br.readLine()) != null) {
+                sorted.add(sCurrentLine);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        assertEquals(expected, sorted);
     }
 }

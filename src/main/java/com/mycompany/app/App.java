@@ -34,15 +34,15 @@ public class App {
 
     public static void main(String[] args ) {
         App app = new App();
-        app.sort();
+        app.sort("C:\\projects\\unsorted.txt", "C:\\projects\\testSorted.txt");
     }
 
-    void sort(){
+    void sort(String sourceName, String sortedName){
         List<String> strings;
-        try (Stream<String> lines = Files.lines(Paths.get("C:\\projects\\task.txt"))) {
+        try (Stream<String> lines = Files.lines(Paths.get(sourceName))) {
             strings = lines.collect(Collectors.toList());
             java.util.Collections.sort(strings);
-            FileWriter writer = new FileWriter("C:\\projects\\task.txt");
+            FileWriter writer = new FileWriter(sortedName);
             for(String str: strings) {
                 writer.write(str + System.lineSeparator());
             }
