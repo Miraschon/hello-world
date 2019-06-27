@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 
 /**
@@ -29,7 +28,7 @@ public class AppTest  {
 
         List<String> test = new ArrayList<>();
         // читаем файл построчно в test
-        try (BufferedReader br = new BufferedReader(new FileReader("C:projects/test.txt")))
+        try (BufferedReader br = new BufferedReader(new FileReader("target/output.txt")))
         {
 
             String sCurrentLine;
@@ -49,7 +48,8 @@ public class AppTest  {
 
     @Test
     public void sumTest(){
-        App apptest = new App();
-        assertEquals(55, apptest.sum("C:\\projects\\hello-world\\src\\test\\resources\\numbers.txt"));
+        App appTest = new App();
+        int sum = appTest.sum("C:\\projects\\hello-world\\src\\test\\resources\\numbers.txt");
+        assertEquals(55, sum);
     }
 }

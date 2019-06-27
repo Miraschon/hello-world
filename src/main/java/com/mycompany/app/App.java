@@ -32,11 +32,11 @@ public class App {
         app.sum("C:\\projects\\hello-world\\src\\test\\resources\\numbers.txt");
     }
 
-    public int sum(String fileName) {
+    @SuppressWarnings("SameParameterValue")
+    int sum(String fileName) {
         int sum = 0;
         try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
-            String sCurrentLine;
-            sCurrentLine = br.readLine();
+            String sCurrentLine = br.readLine();
             String[] s = sCurrentLine.split(" ");
             int [] arr = new int [s.length];
             for(int i=0; i<s.length; i++) {
