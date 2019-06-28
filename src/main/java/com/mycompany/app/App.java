@@ -6,6 +6,11 @@ import org.apache.logging.log4j.Logger;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -32,10 +37,45 @@ public class App {
 
     }
 //
-    public static void main(String[] args ) {
+    public static void main(String[] args ) throws IOException {
         App app = new App();
-        app.sort("C:\\projects\\unsorted.txt", "C:\\projects\\testSorted.txt");
+        //app.sort("C:\\projects\\unsorted.txt", "C:\\projects\\testSorted.txt");
+        app.dateSort("src/test/resources/dates.txt","src/test/resources/datesSorted.txt");
     }
+
+    void dateSort(String sourceFile, String sortedFile) throws IOException {
+        List<String> strings = new ArrayList<>();
+        List<Date> dates = new ArrayList<>();
+
+        try (BufferedReader br = new BufferedReader(new FileReader(sourceFile)))
+        {
+            String sCurrentLine;
+            while ((sCurrentLine = br.readLine()) != null) {
+                strings.add(sCurrentLine);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+
+        for (String dateString : strings) {
+            try {
+                dates.add(simpleDateFormat.parse(dateString));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            Collections.sort(dates);
+            FileWriter writer = new FileWriter(sortedFile);
+            for(Date d: dates) {
+                writer.write(simpleDateFormat.format(d) + System.lineSeparator());
+            }
+            writer.close();
+
+    }
+
+    }
+
 
     void sort(String sourceName, String sortedName){
         List<String> strings;
